@@ -128,7 +128,7 @@ class App(tk.Tk):
             draw.rectangle(b, outline=c[-1])
 
         del draw
-
+		
         composed_img = Image.alpha_composite(img_open, bbox_layer)
 
         if start:
@@ -141,7 +141,12 @@ class App(tk.Tk):
 
         self.image.configure(image=img)
         self.image.image = img
+        store_temp_image(img_name, img)
 
+	def store_temp_image(name, image):
+		new_file_name = name + "-annotated.jpg"
+		new_file_path = os.path.join('/tmp/myapp', new_file_name)
+		image.image.save(new_file_path)
     def print_debug(self):
         logging.info('Starting app...')
 
